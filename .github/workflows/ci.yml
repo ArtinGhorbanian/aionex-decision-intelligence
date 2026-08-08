@@ -20,7 +20,6 @@ jobs:
     env:
       PYTHONDONTWRITEBYTECODE: "1"
       PYTHONUTF8: "1"
-      OMNI_DB_PATH: "${{ runner.temp }}/aionex-ci.sqlite3"
       OMNI_SESSION_SECRET: "ci-only-session-secret-not-valid-outside-this-ephemeral-run"
       OMNI_DEMO_MODE: "1"
       OMNI_AI_DEMO_MODE: "1"
@@ -49,4 +48,6 @@ jobs:
         run: python -m ruff check .
 
       - name: Run the offline test suite
+        env:
+          OMNI_DB_PATH: "${{ runner.temp }}/aionex-ci.sqlite3"
         run: python -m pytest -q
