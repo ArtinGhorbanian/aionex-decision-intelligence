@@ -49,6 +49,7 @@ PREDICTION_SWEEP_INTERVAL_SECONDS = _safe_positive_int("OMNI_SWEEP_INTERVAL", 90
 SESSION_COOKIE = "omni_session"
 SESSION_ID_RE = re.compile(r"^[a-f0-9]{32}$")
 MAX_REQUEST_BYTES = _safe_positive_int("OMNI_MAX_REQUEST_BYTES", 128_000, 8_192, 1_000_000)
+HTTP_STATUS_CONTENT_TOO_LARGE = getattr(status, "HTTP_413_CONTENT_TOO_LARGE", 413)
 MAX_ANALYSES_PER_DAY = _safe_positive_int("OMNI_MAX_ANALYSES_PER_DAY", 20, 1, 1000)
 MAX_CHAT_MESSAGES_PER_DAY = _safe_positive_int("OMNI_MAX_CHAT_MESSAGES_PER_DAY", 80, 1, 5000)
 MAX_DEEP_DIVES_PER_DAY = _safe_positive_int("OMNI_MAX_DEEP_DIVES_PER_DAY", 40, 1, 2000)
@@ -222,7 +223,7 @@ def _request_too_large_response(request: Request) -> JSONResponse:
     return _secure_response(
         request,
         JSONResponse(
-            status_code=status.HTTP_413_CONTENT_TOO_LARGE,
+            status_code=HTTP_STATUS_CONTENT_TOO_LARGE,
             content={
                 "status": "error",
                 "code": "request_too_large",

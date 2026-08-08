@@ -20,6 +20,7 @@ def app_module(tmp_path, monkeypatch):
     for name in ("app", "omni_store", "omni_ai"):
         sys.modules.pop(name, None)
     module = importlib.import_module("app")
+    monkeypatch.setattr(module.store, "LEGACY_VAULT_PATH", tmp_path / "signals_vault.json")
 
     async def fake_intelligence(*_args, **_kwargs):
         streams = [

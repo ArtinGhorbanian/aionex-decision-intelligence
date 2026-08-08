@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 
 
@@ -90,23 +91,41 @@ def test_goal_progress_bounds_are_server_validated(client, completed_analysis):
     assert client.patch(f"/api/goals/{goal['id']}", json={"progress": 101}).status_code == 422
 
 
-def test_legacy_vault_is_never_claimed_by_first_visitor(client, app_module, monkeypatch):
-    before = client.get("/api/vault").json()["data"]
-    assert all(not item.get("analysis_id", "").startswith("legacy-") for item in before)
-    assert client.post("/api/admin/claim-legacy").status_code == 404
+def test_legacy_vault_is_never_claimed_by_first_visitor(app_module, monkeypatch):
+    from fastapi.testclient import TestClient
 
-    monkeypatch.setattr(app_module, "LEGACY_CLAIM_TOKEN", "explicit-test-token")
-    assert client.post(
-        "/api/admin/claim-legacy",
-        headers={"x-omni-legacy-token": "wrong"},
-    ).status_code == 403
-    claimed = client.post(
-        "/api/admin/claim-legacy",
-        headers={"x-omni-legacy-token": "explicit-test-token"},
+    legacy_vault = app_module.store.LEGACY_VAULT_PATH
+    legacy_vault.write_text(
+        json.dumps(
+            [
+                {
+                    "timestamp": "2026-01-01T00:00:00Z",
+                    "tier": "B2C",
+                    "horizon_mode": "instant",
+                    "original_query": "Synthetic legacy security fixture",
+                }
+            ]
+        ),
+        encoding="utf-8",
     )
-    assert claimed.status_code == 200
-    after = client.get("/api/vault").json()["data"]
-    assert any(item.get("analysis_id", "").startswith("legacy-") for item in after)
+    with TestClient(app_module.app) as client:
+        before = client.get("/api/vault").json()["data"]
+        assert all(not item.get("analysis_id", "").startswith("legacy-") for item in before)
+        assert client.post("/api/admin/claim-legacy").status_code == 404
+
+        monkeypatch.setattr(app_module, "LEGACY_CLAIM_TOKEN", "explicit-test-token")
+        assert client.post(
+            "/api/admin/claim-legacy",
+            headers={"x-omni-legacy-token": "wrong"},
+        ).status_code == 403
+        claimed = client.post(
+            "/api/admin/claim-legacy",
+            headers={"x-omni-legacy-token": "explicit-test-token"},
+        )
+        assert claimed.status_code == 200
+        assert claimed.json()["data"]["claimed"] == 1
+        after = client.get("/api/vault").json()["data"]
+        assert any(item.get("analysis_id", "").startswith("legacy-") for item in after)
 
 
 def test_manual_goal_rejects_impossible_calendar_date(client):
