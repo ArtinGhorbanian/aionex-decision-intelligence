@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: Windows / Python 3.14
+    runs-on: windows-latest
+    timeout-minutes: 25
+    env:
+      PYTHONDONTWRITEBYTECODE: "1"
+      PYTHONUTF8: "1"
+      OMNI_DB_PATH: "${{ runner.temp }}/aionex-ci.sqlite3"
+      OMNI_SESSION_SECRET: "ci-only-session-secret-not-valid-outside-this-ephemeral-run"
+      OMNI_DEMO_MODE: "1"
+      OMNI_AI_DEMO_MODE: "1"
+      OMNI_OFFLINE_MODE: "1"
+      OMNI_DEMO_ALLOW_NETWORK: "0"
+      OMNI_PREDICTION_NETWORK_ENABLED: "0"
+      OMNI_PREDICTION_SWEEPER_ENABLED: "0"
+      OMNI_DISABLE_DOCS: "1"
+      OMNI_RELOAD: "0"
+
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Set up Python 3.14
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.14"
+          cache: pip
+          cache-dependency-path: requirements-dev.lock
+
+      - name: Install hash-locked dependencies
+        run: python -m pip install --disable-pip-version-check --require-hashes -r requirements-dev.lock
+
+      - name: Run Ruff
+        run: python -m ruff check .
+
+      - name: Run the offline test suite
+        run: python -m pytest -q

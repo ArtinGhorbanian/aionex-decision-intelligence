@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="AIONEX Decision Intelligence">
+  <defs>
+    <linearGradient id="ice" x1="10" y1="8" x2="54" y2="56" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#e9fdff"/>
+      <stop offset=".48" stop-color="#6ce8ff"/>
+      <stop offset="1" stop-color="#6f7cff"/>
+    </linearGradient>
+    <radialGradient id="night" cx=".35" cy=".2" r=".9">
+      <stop stop-color="#18253c"/>
+      <stop offset="1" stop-color="#070a12"/>
+    </radialGradient>
+  </defs>
+  <rect width="64" height="64" rx="17" fill="url(#night)"/>
+  <path d="M32 8 51 19v26L32 56 13 45V19L32 8Z" fill="none" stroke="url(#ice)" stroke-width="3"/>
+  <path d="m20 39 8-17 6 12 10-8" fill="none" stroke="url(#ice)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="44" cy="26" r="3.2" fill="#e9fdff"/>
+</svg>

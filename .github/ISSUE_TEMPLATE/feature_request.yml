@@ -1,0 +1,69 @@
+name: Feature request
+description: Propose a bounded improvement for the private AIONEX pre-release.
+title: "[Feature]: "
+labels:
+  - enhancement
+body:
+  - type: markdown
+    attributes:
+      value: |
+        AIONEX is a private pre-release product presentation. Proposals should preserve truthful claims, user control, provider terms, security boundaries, and a useful offline path.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: User problem
+      description: Describe the observed problem without assuming a particular implementation.
+    validations:
+      required: true
+
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Desired outcome
+      description: State a testable user outcome and who benefits.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: scope
+    attributes:
+      label: Primary scope
+      options:
+        - Product workflow
+        - Reliability and recovery
+        - Privacy and security
+        - Accessibility
+        - Provider integration
+        - Storage and identity
+        - Developer experience
+        - Documentation
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: constraints
+    attributes:
+      label: Constraints and risks
+      description: Include privacy, security, legal, provider, cost, accessibility, and migration concerns where applicable.
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance evidence
+      description: Explain how the result can be verified without relying on marketing claims.
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Proposal checks
+      options:
+        - label: This request does not require fabricated data, hidden network access, or a guaranteed outcome claim.
+          required: true
+        - label: I have not included confidential client or provider information.
+          required: true

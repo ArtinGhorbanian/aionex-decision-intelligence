@@ -1,0 +1,86 @@
+name: Bug report
+description: Report a reproducible defect in the private AIONEX pre-release.
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        AIONEX is currently a private pre-release product presentation. Do not include credentials, session cookies, personal data, private strategy content, or unpublished provider responses. Security vulnerabilities must be reported through a private repository security channel, not a public issue.
+
+  - type: input
+    id: revision
+    attributes:
+      label: Revision
+      description: Commit SHA, branch, or local build identifier.
+      placeholder: abc1234
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Affected area
+      options:
+        - Intake and validation
+        - Analysis
+        - Follow-up chat
+        - Deep dive
+        - Vault and history
+        - Memory and profile
+        - Goals and progress
+        - Intelligence providers
+        - Storage
+        - User interface and accessibility
+        - Build or CI
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Reproduction steps
+      description: Use synthetic or redacted values only.
+      placeholder: |
+        1. Start the application in offline demo mode.
+        2. Open ...
+        3. Submit ...
+        4. Observe ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: Include sanitized logs or screenshots if useful.
+    validations:
+      required: true
+
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Operating system, Python version, browser, and demo/offline status.
+      placeholder: Windows 11, Python 3.14, Edge, offline demo
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety confirmation
+      options:
+        - label: I removed credentials, cookies, personal data, and confidential business information.
+          required: true
+        - label: I reproduced this on the stated revision and checked for an existing issue.
+          required: true

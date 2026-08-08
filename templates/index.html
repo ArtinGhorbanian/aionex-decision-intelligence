@@ -1,0 +1,721 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="color-scheme" content="dark light">
+    <meta id="theme-color-meta" name="theme-color" content="#070a12">
+    <meta name="description" content="AIONEX turns goals, constraints, evidence, and risk into reviewable action plans for people and teams.">
+    <title>AIONEX | Decision Intelligence Workspace</title>
+    <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="/static/script.js" defer></script>
+</head>
+<body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <svg class="svg-sprite" aria-hidden="true" focusable="false">
+        <symbol id="icon-spark" viewBox="0 0 24 24">
+            <path d="M12 2l1.5 5.2L19 9l-5.5 1.8L12 16l-1.5-5.2L5 9l5.5-1.8L12 2Z"/>
+            <path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8L19 15Z"/>
+        </symbol>
+        <symbol id="icon-compass" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="8.5"/>
+            <path d="m15.7 8.3-2.1 5.3-5.3 2.1 2.1-5.3 5.3-2.1Z"/>
+        </symbol>
+        <symbol id="icon-history" viewBox="0 0 24 24">
+            <path d="M4.5 8.5A8 8 0 1 1 4 14"/>
+            <path d="M4.5 4.5v4h4M12 7.5V12l3 2"/>
+        </symbol>
+        <symbol id="icon-target" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="8.5"/>
+            <circle cx="12" cy="12" r="4.5"/>
+            <circle cx="12" cy="12" r="1"/>
+        </symbol>
+        <symbol id="icon-memory" viewBox="0 0 24 24">
+            <path d="M9 4.5a3 3 0 0 0-4.6 3.3A3.5 3.5 0 0 0 4.8 14 3 3 0 0 0 9 18.5V4.5ZM15 4.5a3 3 0 0 1 4.6 3.3 3.5 3.5 0 0 1-.4 6.2 3 3 0 0 1-4.2 4.5V4.5Z"/>
+            <path d="M9 8H7.5M15 8h1.5M9 14H7M15 14h2M12 4v16"/>
+        </symbol>
+        <symbol id="icon-chart" viewBox="0 0 24 24">
+            <path d="M4 19.5h16M6.5 17V11M11 17V6M15.5 17v-4M20 17V8"/>
+        </symbol>
+        <symbol id="icon-user" viewBox="0 0 24 24">
+            <circle cx="12" cy="8" r="3.5"/>
+            <path d="M5.5 19c.7-3.3 3-5 6.5-5s5.8 1.7 6.5 5"/>
+        </symbol>
+        <symbol id="icon-building" viewBox="0 0 24 24">
+            <path d="M5 20V5l9-2v17M14 9h5v11M3 20h18"/>
+            <path d="M8 8h2M8 12h2M8 16h2M16.5 12h1"/>
+        </symbol>
+        <symbol id="icon-moon" viewBox="0 0 24 24">
+            <path d="M19.5 15.2A8 8 0 0 1 8.8 4.5 8 8 0 1 0 19.5 15.2Z"/>
+        </symbol>
+        <symbol id="icon-menu" viewBox="0 0 24 24">
+            <path d="M4 7h16M4 12h16M4 17h16"/>
+        </symbol>
+        <symbol id="icon-close" viewBox="0 0 24 24">
+            <path d="m6 6 12 12M18 6 6 18"/>
+        </symbol>
+        <symbol id="icon-arrow" viewBox="0 0 24 24">
+            <path d="M5 12h14M14 7l5 5-5 5"/>
+        </symbol>
+        <symbol id="icon-send" viewBox="0 0 24 24">
+            <path d="m4 5 16 7-16 7 3-7-3-7Z"/>
+            <path d="M7 12h13"/>
+        </symbol>
+        <symbol id="icon-check" viewBox="0 0 24 24">
+            <path d="m5 12.5 4.2 4L19 7"/>
+        </symbol>
+        <symbol id="icon-shield" viewBox="0 0 24 24">
+            <path d="M12 3 5 6v5.5c0 4.5 2.8 7.5 7 9.5 4.2-2 7-5 7-9.5V6l-7-3Z"/>
+            <path d="m9 12 2 2 4-4"/>
+        </symbol>
+        <symbol id="icon-plus" viewBox="0 0 24 24">
+            <path d="M12 5v14M5 12h14"/>
+        </symbol>
+        <symbol id="icon-download" viewBox="0 0 24 24">
+            <path d="M12 4v11M8 11l4 4 4-4M5 20h14"/>
+        </symbol>
+        <symbol id="icon-trash" viewBox="0 0 24 24">
+            <path d="M5 7h14M9 7V4h6v3M7.5 7l.7 13h7.6l.7-13M10 11v5M14 11v5"/>
+        </symbol>
+    </svg>
+
+    <div class="ambient-scene" aria-hidden="true">
+        <span class="ambient-orb ambient-orb--cyan"></span>
+        <span class="ambient-orb ambient-orb--violet"></span>
+        <svg class="ambient-grid" viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid slice">
+            <defs>
+                <linearGradient id="ambient-line-gradient" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0" stop-color="#35e7ff" stop-opacity="0"/>
+                    <stop offset=".5" stop-color="#35e7ff" stop-opacity=".28"/>
+                    <stop offset="1" stop-color="#8b7cff" stop-opacity="0"/>
+                </linearGradient>
+            </defs>
+            <g class="ambient-lines">
+                <path d="M70 170 260 90 430 220 620 110 830 230 1090 120"/>
+                <path d="M20 570 230 450 410 600 640 430 860 590 1170 430"/>
+                <path d="M260 90 230 450M430 220 410 600M620 110 640 430M830 230 860 590"/>
+            </g>
+            <g class="ambient-nodes">
+                <circle cx="260" cy="90" r="4"/>
+                <circle cx="430" cy="220" r="3"/>
+                <circle cx="620" cy="110" r="5"/>
+                <circle cx="830" cy="230" r="3"/>
+                <circle cx="230" cy="450" r="4"/>
+                <circle cx="410" cy="600" r="3"/>
+                <circle cx="640" cy="430" r="5"/>
+                <circle cx="860" cy="590" r="4"/>
+            </g>
+        </svg>
+        <span class="ambient-noise"></span>
+    </div>
+
+    <div id="app-shell" class="app-shell">
+        <aside id="app-sidebar" class="app-sidebar" aria-label="Primary navigation">
+            <div class="sidebar-brand-wrap">
+                <a class="brand" href="#analysis-view" aria-label="AIONEX, decision intelligence workspace">
+                    <span class="brand-mark" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><use href="#icon-spark"/></svg>
+                    </span>
+                    <span class="brand-copy">
+                        <bdi class="brand-name" lang="en" dir="ltr">AIONEX</bdi>
+                        <span class="brand-tagline">Decision Intelligence Workspace</span>
+                    </span>
+                </a>
+            </div>
+
+            <nav class="primary-nav" aria-label="Application sections">
+                <p class="nav-label">Workspace</p>
+                <button id="nav-analysis-btn" class="nav-item is-active" type="button" data-view="analysis" aria-current="page">
+                    <svg aria-hidden="true"><use href="#icon-compass"/></svg>
+                    <span>New analysis</span>
+                    <span class="nav-indicator" aria-hidden="true"></span>
+                </button>
+                <button id="open-vault-btn" class="nav-item" type="button" data-dialog-target="vault-container">
+                    <svg aria-hidden="true"><use href="#icon-history"/></svg>
+                    <span>Conversations & history</span>
+                    <span id="vault-count-badge" class="nav-badge" hidden>0</span>
+                </button>
+
+                <p class="nav-label nav-label--secondary">Execution & knowledge</p>
+                <button id="open-goals-btn" class="nav-item" type="button" data-dialog-target="goals-container">
+                    <svg aria-hidden="true"><use href="#icon-target"/></svg>
+                    <span>Goals</span>
+                </button>
+                <button id="open-memory-btn" class="nav-item" type="button" data-dialog-target="memory-container">
+                    <svg aria-hidden="true"><use href="#icon-memory"/></svg>
+                    <span>Saved context</span>
+                </button>
+
+                <p class="nav-label nav-label--secondary">Transparency & cost</p>
+                <button id="open-calibration-btn" class="nav-item" type="button" data-dialog-target="calibration-container">
+                    <svg aria-hidden="true"><use href="#icon-chart"/></svg>
+                    <span>Analysis track record</span>
+                </button>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div id="system-state" class="system-state" title="AI service status" data-status="checking">
+                    <span class="system-state-dot" aria-hidden="true"></span>
+                    <span>
+                        <strong id="system-state-label">Checking AI service</strong>
+                        <small id="system-state-detail">Analysis runs only after you choose Generate analysis.</small>
+                    </span>
+                </div>
+                <button id="theme-toggle-btn" class="theme-toggle-btn" type="button" aria-label="Enable light theme">
+                    <span class="theme-toggle-icon" aria-hidden="true">
+                        <svg><use href="#icon-moon"/></svg>
+                    </span>
+                    <span id="theme-toggle-label">Light theme</span>
+                    <span class="theme-toggle-track" aria-hidden="true"><span></span></span>
+                </button>
+            </div>
+        </aside>
+
+        <button id="sidebar-backdrop" class="sidebar-backdrop" type="button" aria-label="Close navigation menu" tabindex="-1"></button>
+
+        <div class="workspace-shell">
+            <header class="mobile-header">
+                <a class="mobile-brand" href="#analysis-view" aria-label="AIONEX">
+                    <span class="brand-mark" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><use href="#icon-spark"/></svg>
+                    </span>
+                    <bdi lang="en" dir="ltr">AIONEX</bdi>
+                </a>
+                <div class="mobile-header-actions">
+                    <button id="mobile-nav-toggle" class="icon-button" type="button" aria-label="Open main menu" aria-controls="app-sidebar" aria-expanded="false">
+                        <svg aria-hidden="true"><use href="#icon-menu"/></svg>
+                    </button>
+                </div>
+            </header>
+
+            <main id="main-content" class="main-content" tabindex="-1">
+                <section id="analysis-view" class="analysis-view" aria-labelledby="page-title">
+                    <header class="hero">
+                        <div class="hero-copy">
+                            <div class="eyebrow">
+                                <span class="eyebrow-pulse" aria-hidden="true"></span>
+                                <span>AIONEX decision intelligence</span>
+                                <span class="eyebrow-separator" aria-hidden="true"></span>
+                                <span>Risk-aware and trackable</span>
+                            </div>
+                            <h1 id="page-title">Turn uncertainty into<br><span>a testable action plan</span>.</h1>
+                            <div id="hero-introduction-details" class="hero-details">
+                                <p class="hero-lead">Bring your goals, constraints, and evidence together. AIONEX asks focused questions, tests assumptions, and builds a plan you can review as conditions change.</p>
+                                <ul class="hero-proof" aria-label="Core capabilities">
+                                    <li><svg aria-hidden="true"><use href="#icon-check"/></svg>Clarifying questions without an AI call</li>
+                                    <li><svg aria-hidden="true"><use href="#icon-check"/></svg>Scenarios with explicit review triggers</li>
+                                    <li><svg aria-hidden="true"><use href="#icon-check"/></svg>Long-term memory suggestions are opt-in</li>
+                                </ul>
+                            </div>
+                            <button id="hero-toggle-btn" class="text-button hero-toggle" type="button" aria-expanded="true" aria-controls="hero-introduction-details hero-constellation">Collapse introduction</button>
+                        </div>
+
+                        <figure id="hero-constellation" class="hero-constellation" aria-label="A visual representation of turning scattered inputs into a clear decision">
+                            <svg viewBox="0 0 420 360" role="img" aria-hidden="true">
+                                <defs>
+                                    <radialGradient id="core-gradient" cx="50%" cy="45%" r="60%">
+                                        <stop offset="0" stop-color="#dffbff" stop-opacity=".95"/>
+                                        <stop offset=".2" stop-color="#35e7ff" stop-opacity=".7"/>
+                                        <stop offset="1" stop-color="#35e7ff" stop-opacity="0"/>
+                                    </radialGradient>
+                                    <linearGradient id="orbit-gradient" x1="0" y1="0" x2="1" y2="1">
+                                        <stop offset="0" stop-color="#35e7ff"/>
+                                        <stop offset="1" stop-color="#8b7cff"/>
+                                    </linearGradient>
+                                </defs>
+                                <g class="orbit-rings">
+                                    <ellipse cx="210" cy="180" rx="144" ry="78"/>
+                                    <ellipse cx="210" cy="180" rx="112" ry="150" transform="rotate(34 210 180)"/>
+                                    <ellipse cx="210" cy="180" rx="112" ry="150" transform="rotate(-34 210 180)"/>
+                                </g>
+                                <g class="orbit-paths">
+                                    <path d="M76 155 142 112 210 180 302 104 355 166"/>
+                                    <path d="M95 245 160 226 210 180 270 236 334 216"/>
+                                </g>
+                                <g class="orbit-points">
+                                    <circle cx="76" cy="155" r="5"/>
+                                    <circle cx="142" cy="112" r="4"/>
+                                    <circle cx="302" cy="104" r="5"/>
+                                    <circle cx="355" cy="166" r="4"/>
+                                    <circle cx="95" cy="245" r="4"/>
+                                    <circle cx="160" cy="226" r="5"/>
+                                    <circle cx="270" cy="236" r="4"/>
+                                    <circle cx="334" cy="216" r="5"/>
+                                </g>
+                                <circle class="orbit-core-glow" cx="210" cy="180" r="58"/>
+                                <circle class="orbit-core" cx="210" cy="180" r="35"/>
+                            </svg>
+                            <figcaption>
+                                <span class="constellation-kicker">AIONEX CORE</span>
+                                <strong>Clarity from complexity</strong>
+                            </figcaption>
+                            <span class="orbit-label orbit-label--one">Context</span>
+                            <span class="orbit-label orbit-label--two">Risk</span>
+                            <span class="orbit-label orbit-label--three">Action</span>
+                        </figure>
+                    </header>
+
+                    <div class="analysis-layout">
+                        <div class="analysis-primary">
+                            <section class="glass-panel mode-panel" aria-labelledby="mode-heading">
+                                <div class="section-heading">
+                                    <div>
+                                        <span class="section-step">01</span>
+                                        <h2 id="mode-heading">Who is this decision for?</h2>
+                                        <p>Each path uses the questions and outputs that fit its real decision context.</p>
+                                    </div>
+                                </div>
+
+                                <fieldset id="audience-selector" class="mode-selector">
+                                    <legend class="sr-only">Choose an analysis path</legend>
+                                    <label class="mode-card mode-card--individual" data-mode-card="B2C">
+                                        <input id="btn-b2c" class="mode-card-input" type="radio" name="tier" value="B2C" data-tier="B2C" checked>
+                                        <span class="mode-card-head">
+                                            <span class="mode-card-icon" aria-hidden="true"><svg><use href="#icon-user"/></svg></span>
+                                            <span class="mode-card-title">
+                                                <strong>For myself</strong>
+                                                <small>Individual path <bdi lang="en" dir="ltr">B2C</bdi></small>
+                                            </span>
+                                            <span class="mode-card-check" aria-hidden="true"><svg><use href="#icon-check"/></svg></span>
+                                        </span>
+                                        <span class="mode-card-description">For side income, a small business, or choosing your next move with your own time and capital.</span>
+                                        <span class="mode-card-features">
+                                            <span>Skills & time</span>
+                                            <span>Capital at risk</span>
+                                            <span>7/30/90-day plan</span>
+                                        </span>
+                                    </label>
+
+                                    <label class="mode-card mode-card--business" data-mode-card="B2B">
+                                        <input id="btn-b2b" class="mode-card-input" type="radio" name="tier" value="B2B" data-tier="B2B">
+                                        <span class="mode-card-head">
+                                            <span class="mode-card-icon" aria-hidden="true"><svg><use href="#icon-building"/></svg></span>
+                                            <span class="mode-card-title">
+                                                <strong>For a company or team</strong>
+                                                <small>Business path <bdi lang="en" dir="ltr">B2B</bdi></small>
+                                            </span>
+                                            <span class="mode-card-check" aria-hidden="true"><svg><use href="#icon-check"/></svg></span>
+                                        </span>
+                                        <span class="mode-card-description">For supply chains, cost reduction, risk assessment, or decisions with multiple stakeholders.</span>
+                                        <span class="mode-card-features">
+                                            <span>Financial & operational impact</span>
+                                            <span>Stakeholders & constraints</span>
+                                            <span>30/60/90-day rollout</span>
+                                        </span>
+                                    </label>
+                                </fieldset>
+                            </section>
+
+                            <section class="glass-panel composer-panel" aria-labelledby="query-heading">
+                                <div class="section-heading section-heading--composer">
+                                    <div>
+                                        <span class="section-step">02</span>
+                                        <h2 id="query-heading">Describe the problem in your own words</h2>
+                                        <p>It does not need to be complete; a few focused questions will fill the important gaps.</p>
+                                    </div>
+                                    <span class="privacy-chip"><svg aria-hidden="true"><use href="#icon-shield"/></svg>Review what is saved</span>
+                                </div>
+
+                                <label class="horizon-control" data-component="horizon-control">
+                                    <input id="strategic-toggle" type="checkbox" name="strategic_mode" role="switch">
+                                    <span class="horizon-icon" aria-hidden="true"><svg><use href="#icon-compass"/></svg></span>
+                                    <span class="horizon-copy">
+                                        <strong>Long-term strategy mode</strong>
+                                        <small>Adds multi-horizon scenarios, structural drivers, and explicit review timing.</small>
+                                    </span>
+                                    <span class="switch-track" aria-hidden="true"><span class="switch-thumb"></span></span>
+                                </label>
+
+                                <form id="analysis-form" class="analysis-form" novalidate>
+                                    <label class="input-label" for="omni-input">Explain it in one or more sentences</label>
+                                    <div class="query-composer">
+                                        <textarea id="omni-input" name="query" rows="4" maxlength="3000" dir="auto" enterkeyhint="enter" aria-describedby="query-help analysis-form-error" placeholder="For example: I have $5,000 and two hours a day. Which lower-risk path best fits my skills?" required></textarea>
+                                        <div class="composer-actions">
+                                            <span id="query-char-count" class="char-count" aria-live="off">0 of 3,000</span>
+                                            <button id="analyze-btn" class="primary-button" type="submit">
+                                                <span>Generate analysis · uses AI</span>
+                                                <svg aria-hidden="true"><use href="#icon-arrow"/></svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="form-support-row">
+                                        <p id="query-help">Share whatever you know about your budget, time, skills, and goal.</p>
+                                        <p id="analysis-form-error" class="form-error" role="alert" hidden></p>
+                                    </div>
+                                </form>
+
+                                <div class="query-presets" aria-label="Example questions">
+                                    <span>Quick start:</span>
+                                    <button type="button" data-query-preset="I have 10 hours a week and limited capital; I want a realistic income path.">Side income</button>
+                                    <button type="button" data-query-preset="Our sourcing costs have increased; I want to assess the root risks and alternatives.">Supply risk</button>
+                                    <button type="button" data-query-preset="I am choosing between several opportunities and want to compare risk, time, and return.">Compare opportunities</button>
+                                </div>
+                            </section>
+
+                            <section id="clarification-wizard" class="glass-panel clarification-wizard" aria-labelledby="wizard-title" aria-live="polite" data-state="idle" hidden>
+                                <header class="wizard-header">
+                                    <div>
+                                        <span class="section-step">03</span>
+                                        <p id="wizard-step-label" class="wizard-step-label">Step 1 of 3</p>
+                                        <h2 id="wizard-title">A few details for a more precise answer</h2>
+                                        <p>We only ask for details that can materially change the result.</p>
+                                    </div>
+                                    <div class="wizard-accuracy" aria-label="Estimated context coverage">
+                                        <span id="wizard-precision-label">Starting coverage</span>
+                                        <strong id="wizard-precision-value">40%</strong>
+                                    </div>
+                                </header>
+                                <progress id="wizard-progress-bar" class="wizard-progress" value="1" max="3" aria-label="Clarifying-question progress">1 of 3</progress>
+
+                                <form id="clarification-form" class="clarification-form" novalidate>
+                                    <div id="clarification-questions" class="clarification-questions"></div>
+                                    <section id="clarification-summary" class="clarification-summary" aria-labelledby="clarification-summary-title" hidden>
+                                        <h3 id="clarification-summary-title">What I understood from you</h3>
+                                        <div data-summary-content></div>
+                                    </section>
+                                    <div class="wizard-actions">
+                                        <button id="wizard-back-btn" class="secondary-button" type="button">Previous step</button>
+                                        <button id="wizard-skip-btn" class="text-button" type="button">Not sure yet</button>
+                                        <button id="wizard-next-btn" class="primary-button" type="button">Continue</button>
+                                        <button id="wizard-submit-btn" class="primary-button primary-button--generate" type="submit" hidden>
+                                            <svg aria-hidden="true"><use href="#icon-spark"/></svg>
+                                            Generate analysis · uses AI
+                                        </button>
+                                    </div>
+                                </form>
+                            </section>
+
+                            <template id="clarification-question-template">
+                                <fieldset class="wizard-question" data-question>
+                                    <legend data-question-label></legend>
+                                    <p data-question-help></p>
+                                    <div class="answer-options" data-answer-options></div>
+                                    <label class="wizard-free-answer" hidden>
+                                        <span>Your answer</span>
+                                        <input type="text" data-free-answer dir="auto">
+                                    </label>
+                                </fieldset>
+                            </template>
+
+                            <section id="conversation-region" class="conversation-region" aria-labelledby="conversation-title">
+                                <header class="conversation-header">
+                                    <div>
+                                        <span class="section-step">04</span>
+                                        <h2 id="conversation-title">Your analysis and conversation</h2>
+                                        <p>The result is not the end; challenge assumptions and refine the plan through conversation.</p>
+                                    </div>
+                                    <button id="new-analysis-btn" class="secondary-button secondary-button--compact" type="button" hidden>
+                                        <svg aria-hidden="true"><use href="#icon-plus"/></svg>
+                                        New analysis
+                                    </button>
+                                </header>
+
+                                <div id="analysis-status" class="analysis-status" role="status" aria-live="polite" hidden>
+                                    <span class="status-orbit" aria-hidden="true"><span></span></span>
+                                    <div>
+                                        <strong id="analysis-status-label">Building your analysis</strong>
+                                        <p id="system-logs" aria-live="off">Preparing context…</p>
+                                    </div>
+                                </div>
+
+                                <div id="conversation-empty-state" class="conversation-empty-state">
+                                    <span class="empty-state-icon" aria-hidden="true"><svg><use href="#icon-compass"/></svg></span>
+                                    <div>
+                                        <strong>There is no analysis in this conversation yet</strong>
+                                        <p>Choose a path and describe your situation. Your result will appear here after context is complete.</p>
+                                    </div>
+                                </div>
+
+                                <div id="conversation-thread" class="conversation-thread" role="log" aria-live="polite" aria-relevant="additions text" aria-label="Conversation messages"></div>
+                                <div id="results-container" class="results-container hidden" aria-live="off" aria-busy="false"></div>
+
+                                <form id="follow-up-form" class="follow-up-form" hidden>
+                                    <div class="follow-up-suggestions" aria-label="Suggested questions">
+                                        <button type="button" data-follow-up-prompt="Clarify the main assumptions behind this recommendation.">Main assumptions</button>
+                                        <button type="button" data-follow-up-prompt="Redesign this plan for a smaller budget.">Smaller budget</button>
+                                        <button type="button" data-follow-up-prompt="Give me a precise checklist for the first week.">First-week plan</button>
+                                        <button type="button" data-follow-up-prompt="What is the worst case and the stop signal?">Worst case</button>
+                                    </div>
+                                    <label for="follow-up-input">Continue discussing this recommendation</label>
+                                    <div class="follow-up-composer">
+                                        <textarea id="follow-up-input" name="message" rows="2" maxlength="2000" dir="auto" placeholder="For example: if I had only half this budget, which part of the plan should change?"></textarea>
+                                        <button id="follow-up-btn" class="send-button" type="submit" aria-label="Send message">
+                                            <svg aria-hidden="true"><use href="#icon-send"/></svg>
+                                        </button>
+                                    </div>
+                                    <p id="follow-up-error" class="form-error" role="alert" hidden></p>
+                                </form>
+                            </section>
+                        </div>
+
+                        <aside id="context-rail" class="context-rail" aria-label="Analysis context and status">
+                            <button id="context-rail-toggle" class="context-rail-toggle" type="button" aria-expanded="true" aria-controls="context-rail-content">
+                                <span class="context-icon" aria-hidden="true"><svg><use href="#icon-compass"/></svg></span>
+                                <span class="context-rail-toggle-copy">
+                                    <strong>Decision context center</strong>
+                                    <small>Context, saved information, goals, and usage in one organized view</small>
+                                </span>
+                                <svg class="context-rail-chevron" aria-hidden="true"><use href="#icon-arrow"/></svg>
+                            </button>
+                            <div id="context-rail-content" class="context-rail-content">
+                            <section class="context-card context-card--precision" aria-labelledby="precision-heading">
+                                <div class="context-card-head">
+                                    <span class="context-icon" aria-hidden="true"><svg><use href="#icon-compass"/></svg></span>
+                                    <div>
+                                        <h2 id="precision-heading">Context coverage</h2>
+                                        <p>Estimate before AI use</p>
+                                    </div>
+                                </div>
+                                <div class="precision-score">
+                                    <strong id="precision-meter" aria-label="Estimated context coverage">0%</strong>
+                                    <span>Estimated</span>
+                                </div>
+                                <progress id="precision-meter-fill" class="precision-track" value="0" max="100" aria-label="Estimated context coverage">0%</progress>
+                                <p id="precision-label" class="precision-hint">Important context will appear here as you describe the problem.</p>
+                            </section>
+
+                            <section class="context-card" aria-labelledby="context-summary-heading">
+                                <div class="context-card-head">
+                                    <span class="context-icon" aria-hidden="true"><svg><use href="#icon-user"/></svg></span>
+                                    <div>
+                                        <h2 id="context-summary-heading">Decision context</h2>
+                                        <p>Only information for this analysis</p>
+                                    </div>
+                                </div>
+                                <ul id="context-summary-list" class="context-summary-list" data-empty="true">
+                                    <li class="context-empty">No information has been captured yet.</li>
+                                </ul>
+                            </section>
+
+                            <section id="memory-preview" class="context-card context-card--action" aria-label="Memory preview">
+                                <div class="context-card-head">
+                                    <span class="context-icon" aria-hidden="true"><svg><use href="#icon-memory"/></svg></span>
+                                    <div>
+                                        <h2 id="memory-preview-heading">Saved context</h2>
+                                        <p>Analysis context may be saved for this browser. Long-term memory suggestions require your approval.</p>
+                                    </div>
+                                </div>
+                                <button class="context-link" type="button" data-dialog-target="memory-container">Review saved context <svg aria-hidden="true"><use href="#icon-arrow"/></svg></button>
+                            </section>
+
+                            <section id="active-goal-preview" class="context-card context-card--action" aria-label="Active goal preview">
+                                <div class="context-card-head">
+                                    <span class="context-icon" aria-hidden="true"><svg><use href="#icon-target"/></svg></span>
+                                    <div>
+                                        <h2 id="active-goal-heading">Active goal</h2>
+                                        <p data-goal-preview-text>You do not have an active goal yet.</p>
+                                    </div>
+                                </div>
+                                <button class="context-link" type="button" data-dialog-target="goals-container">View goals <svg aria-hidden="true"><use href="#icon-arrow"/></svg></button>
+                            </section>
+
+                            <section id="usage-preview" class="context-card context-card--usage" aria-label="Usage summary">
+                                <div class="usage-line">
+                                    <svg aria-hidden="true"><use href="#icon-shield"/></svg>
+                                    <div>
+                                        <h2 id="usage-heading">Cost-aware usage</h2>
+                                        <p>Choosing a path, answering clarifying questions, managing memory, and tracking goals do not call AI.</p>
+                                    </div>
+                                </div>
+                            </section>
+                            </div>
+                        </aside>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <dialog id="vault-container" class="app-dialog app-dialog--wide" aria-labelledby="vault-title">
+        <div class="dialog-surface">
+            <header class="dialog-header">
+                <div class="dialog-title-wrap">
+                    <span class="dialog-icon" aria-hidden="true"><svg><use href="#icon-history"/></svg></span>
+                    <div>
+                        <p class="dialog-kicker">Browser-scoped local history</p>
+                        <h2 id="vault-title">Past conversations and analyses</h2>
+                        <p>Conversations are stored as plain records in this app's local database and associated with this browser; this is not an encrypted account vault.</p>
+                    </div>
+                </div>
+                <button id="close-vault-btn" class="dialog-close" type="button" data-dialog-close aria-label="Close history">
+                    <svg aria-hidden="true"><use href="#icon-close"/></svg>
+                </button>
+            </header>
+            <div class="dialog-toolbar">
+                <label class="dialog-search">
+                    <span class="sr-only">Search history</span>
+                    <svg aria-hidden="true"><use href="#icon-compass"/></svg>
+                    <input id="vault-search-input" type="search" placeholder="Search titles or question text…" autocomplete="off">
+                </label>
+                <label class="dialog-filter">
+                    <span class="sr-only">Filter analysis type</span>
+                    <select id="vault-filter">
+                        <option value="all">All paths</option>
+                        <option value="B2C">Individual</option>
+                        <option value="B2B">Business</option>
+                    </select>
+                </label>
+            </div>
+            <div id="vault-list" class="vault-list" role="list" aria-live="polite">
+                <div class="dialog-empty-state" data-vault-empty>
+                    <svg aria-hidden="true"><use href="#icon-history"/></svg>
+                    <strong>There is no history to show</strong>
+                    <p>Your first completed analysis will be available here.</p>
+                </div>
+            </div>
+        </div>
+    </dialog>
+
+    <dialog id="goals-container" class="app-dialog app-dialog--wide" aria-labelledby="goals-title">
+        <div class="dialog-surface">
+            <header class="dialog-header">
+                <div class="dialog-title-wrap">
+                    <span class="dialog-icon dialog-icon--violet" aria-hidden="true"><svg><use href="#icon-target"/></svg></span>
+                    <div>
+                        <p class="dialog-kicker">From recommendation to outcome</p>
+                        <h2 id="goals-title">Goals and milestones</h2>
+                        <p>Update progress manually and schedule your next check-in.</p>
+                    </div>
+                </div>
+                <button id="close-goals-btn" class="dialog-close" type="button" data-dialog-close aria-label="Close goals">
+                    <svg aria-hidden="true"><use href="#icon-close"/></svg>
+                </button>
+            </header>
+
+            <div class="goals-overview" aria-label="Goals summary">
+                <div><strong id="active-goals-count">0</strong><span>Active goal</span></div>
+                <div><strong id="completed-goals-count">0</strong><span>Completed</span></div>
+                <button id="new-goal-btn" class="primary-button" type="button" data-goal-create><svg aria-hidden="true"><use href="#icon-plus"/></svg>New goal</button>
+            </div>
+
+            <div id="goals-list" class="goals-list" role="list" aria-live="polite">
+                <div class="dialog-empty-state" data-goals-empty>
+                    <svg aria-hidden="true"><use href="#icon-target"/></svg>
+                    <strong>You have not created a goal yet</strong>
+                    <p>Turn a recommendation into a trackable goal without using AI.</p>
+                </div>
+            </div>
+
+            <section id="goal-editor" class="goal-editor" aria-labelledby="goal-editor-title" hidden>
+                <div class="goal-editor-heading">
+                    <div>
+                        <p class="dialog-kicker">Precise definition</p>
+                        <h3 id="goal-editor-title">Make the goal measurable</h3>
+                    </div>
+                    <button id="goal-cancel-btn" class="icon-button" type="button" aria-label="Close goal editor"><svg aria-hidden="true"><use href="#icon-close"/></svg></button>
+                </div>
+                <form id="goal-form" class="goal-form">
+                    <label class="field field--wide">
+                        <span>Goal title</span>
+                        <input id="goal-title-input" name="title" type="text" maxlength="160" required>
+                    </label>
+                    <label class="field field--wide">
+                        <span>Success criterion</span>
+                        <input id="goal-target-input" name="target" type="text" maxlength="240" placeholder="For example: reach five paying customers" required>
+                    </label>
+                    <label class="field">
+                        <span>Deadline</span>
+                        <input id="goal-deadline-input" name="deadline" type="date">
+                    </label>
+                    <label class="field">
+                        <span>Weekly time</span>
+                        <input id="goal-time-input" name="weekly_time" type="text" inputmode="decimal" placeholder="For example: 10 hours">
+                    </label>
+                    <label class="field field--wide">
+                        <span>Budget or spending cap</span>
+                        <input id="goal-budget-input" name="budget" type="text" inputmode="decimal" dir="auto" placeholder="For example: $5,000">
+                    </label>
+                    <div class="goal-form-actions field--wide">
+                        <button class="secondary-button" type="reset">Clear</button>
+                        <button id="goal-save-btn" class="primary-button" type="submit">Save goal</button>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </dialog>
+
+    <dialog id="memory-container" class="app-dialog app-dialog--wide" aria-labelledby="memory-title">
+        <div class="dialog-surface">
+            <header class="dialog-header">
+                <div class="dialog-title-wrap">
+                    <span class="dialog-icon dialog-icon--amber" aria-hidden="true"><svg><use href="#icon-memory"/></svg></span>
+                    <div>
+                        <p class="dialog-kicker">Reviewable, exportable, removable</p>
+                        <h2 id="memory-title">Saved context</h2>
+                        <p>Review context that may be used in future decisions.</p>
+                    </div>
+                </div>
+                <button id="close-memory-btn" class="dialog-close" type="button" data-dialog-close aria-label="Close memory">
+                    <svg aria-hidden="true"><use href="#icon-close"/></svg>
+                </button>
+            </header>
+
+            <div class="memory-trust-note">
+                <svg aria-hidden="true"><use href="#icon-shield"/></svg>
+                <div>
+                    <strong>Long-term memory suggestions are opt-in</strong>
+                    <p>Analysis context may be saved automatically for this browser. Suggested long-term memories are stored only after you confirm them.</p>
+                </div>
+            </div>
+
+            <div class="dialog-toolbar dialog-toolbar--actions">
+                <div class="memory-filter-group" role="group" aria-label="Filter memory">
+                    <button class="filter-chip is-active" type="button" data-memory-filter="all" aria-pressed="true">All</button>
+                    <button class="filter-chip" type="button" data-memory-filter="profile" aria-pressed="false">Profile</button>
+                    <button class="filter-chip" type="button" data-memory-filter="constraint" aria-pressed="false">Constraints</button>
+                    <button class="filter-chip" type="button" data-memory-filter="preference" aria-pressed="false">Preferences</button>
+                </div>
+                <div class="dialog-action-group">
+                    <button id="memory-export-btn" class="secondary-button secondary-button--compact" type="button"><svg aria-hidden="true"><use href="#icon-download"/></svg>Export</button>
+                    <button id="memory-clear-btn" class="danger-button" type="button"><svg aria-hidden="true"><use href="#icon-trash"/></svg>Delete all</button>
+                </div>
+            </div>
+
+            <div id="memory-list" class="memory-list" role="list" aria-live="polite"></div>
+            <div id="memory-empty" class="dialog-empty-state">
+                <svg aria-hidden="true"><use href="#icon-memory"/></svg>
+                <strong>No saved context to show</strong>
+                <p>After an analysis, you can review any suggested long-term memories before saving them.</p>
+            </div>
+        </div>
+    </dialog>
+
+    <dialog id="calibration-container" class="app-dialog app-dialog--wide" aria-labelledby="calibration-title">
+        <div class="dialog-surface">
+            <header class="dialog-header">
+                <div class="dialog-title-wrap">
+                    <span class="dialog-icon dialog-icon--green" aria-hidden="true"><svg><use href="#icon-chart"/></svg></span>
+                    <div>
+                        <p class="dialog-kicker">Performance transparency</p>
+                        <h2 id="calibration-title">Analysis track record</h2>
+                        <p>Compare measurable predictions, sample size, and actual outcomes.</p>
+                    </div>
+                </div>
+                <button id="close-calibration-btn" class="dialog-close" type="button" data-dialog-close aria-label="Close track record">
+                    <svg aria-hidden="true"><use href="#icon-close"/></svg>
+                </button>
+            </header>
+            <div id="calibration-body" class="calibration-body" aria-live="polite">
+                <div class="dialog-empty-state">
+                    <svg aria-hidden="true"><use href="#icon-chart"/></svg>
+                    <strong>There is not enough data for a track record yet</strong>
+                    <p>Outcomes are recorded mechanically when predictions reach their time horizon.</p>
+                </div>
+            </div>
+        </div>
+    </dialog>
+
+    <div id="global-progress" class="global-progress" role="status" aria-live="polite" hidden>
+        <span class="loader" aria-hidden="true"></span>
+        <span id="global-progress-text">Processing…</span>
+    </div>
+    <div id="toast-region" class="toast-region" role="status" aria-live="polite" aria-atomic="true"></div>
+    <div id="assertive-live-region" class="sr-only" role="alert" aria-live="assertive" aria-atomic="true"></div>
+
+    <noscript>
+        <div class="noscript-message">Enable JavaScript to use the interactive AIONEX decision workspace.</div>
+    </noscript>
+</body>
+</html>

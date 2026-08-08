@@ -1,0 +1,6 @@
+* text=auto eol=lf
+*.ps1 text eol=crlf
+*.svg text eol=lf
+*.db binary
+*.sqlite binary
+*.sqlite3 binary

@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title description">
+  <title id="title">AIONEX Decision Intelligence Workspace</title>
+  <desc id="description">Private pre-release identity graphic with a cyan and violet decision network on a dark background. Rights and provider clearance are pending.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#050812"/>
+      <stop offset="0.55" stop-color="#0a1020"/>
+      <stop offset="1" stop-color="#0e0b1d"/>
+    </linearGradient>
+    <radialGradient id="cyanGlow" cx="0.18" cy="0.42" r="0.48">
+      <stop offset="0" stop-color="#35e7ff" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#35e7ff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="violetGlow" cx="0.9" cy="0.12" r="0.52">
+      <stop offset="0" stop-color="#8b7cff" stop-opacity="0.2"/>
+      <stop offset="1" stop-color="#8b7cff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="signal" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#35e7ff"/>
+      <stop offset="1" stop-color="#9b8cff"/>
+    </linearGradient>
+    <linearGradient id="signalSoft" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#35e7ff" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#35e7ff" stop-opacity="0.7"/>
+      <stop offset="1" stop-color="#9b8cff" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="softGlow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="12"/>
+    </filter>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M48 0H0V48" fill="none" stroke="#d9f8ff" stroke-opacity="0.045" stroke-width="1"/>
+    </pattern>
+    <clipPath id="frameClip">
+      <rect x="28" y="28" width="1144" height="574" rx="34"/>
+    </clipPath>
+  </defs>
+
+  <rect width="1200" height="630" fill="#03050a"/>
+  <g clip-path="url(#frameClip)">
+    <rect x="28" y="28" width="1144" height="574" rx="34" fill="url(#background)"/>
+    <rect x="28" y="28" width="1144" height="574" rx="34" fill="url(#cyanGlow)"/>
+    <rect x="28" y="28" width="1144" height="574" rx="34" fill="url(#violetGlow)"/>
+    <rect x="28" y="28" width="1144" height="574" rx="34" fill="url(#grid)"/>
+
+    <circle cx="292" cy="315" r="190" fill="#35e7ff" opacity="0.055" filter="url(#softGlow)"/>
+    <circle cx="310" cy="315" r="116" fill="none" stroke="#35e7ff" stroke-opacity="0.15"/>
+    <circle cx="310" cy="315" r="78" fill="none" stroke="#8b7cff" stroke-opacity="0.22"/>
+
+    <g fill="none" stroke="url(#signal)" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M126 356L204 252L310 315L402 202L478 306" stroke-width="3" stroke-opacity="0.8"/>
+      <path d="M156 430L238 378L310 315L392 404L470 344" stroke-width="2" stroke-opacity="0.62"/>
+      <path d="M204 252L238 378M402 202L392 404M310 315L470 344" stroke-width="1.5" stroke-opacity="0.32"/>
+    </g>
+
+    <g fill="#07111c" stroke-width="3">
+      <circle cx="126" cy="356" r="8" stroke="#35e7ff"/>
+      <circle cx="204" cy="252" r="7" stroke="#35e7ff"/>
+      <circle cx="156" cy="430" r="6" stroke="#35e7ff"/>
+      <circle cx="238" cy="378" r="7" stroke="#35e7ff"/>
+      <circle cx="402" cy="202" r="8" stroke="#9b8cff"/>
+      <circle cx="478" cy="306" r="7" stroke="#9b8cff"/>
+      <circle cx="392" cy="404" r="7" stroke="#9b8cff"/>
+      <circle cx="470" cy="344" r="6" stroke="#9b8cff"/>
+    </g>
+
+    <circle cx="310" cy="315" r="51" fill="#35e7ff" opacity="0.16" filter="url(#softGlow)"/>
+    <circle cx="310" cy="315" r="37" fill="#08131e" stroke="url(#signal)" stroke-width="3"/>
+    <path d="M292 330L310 286L328 330M299 315H321" fill="none" stroke="#e7fbff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <path d="M535 170H1094" stroke="url(#signalSoft)" stroke-width="1"/>
+    <path d="M535 464H1094" stroke="url(#signalSoft)" stroke-width="1"/>
+
+    <g font-family="Segoe UI, Arial, sans-serif">
+      <rect x="884" y="76" width="210" height="38" rx="19" fill="#8b7cff" fill-opacity="0.12" stroke="#9b8cff" stroke-opacity="0.48"/>
+      <circle cx="908" cy="95" r="5" fill="#ffcb76"/>
+      <text x="925" y="101" fill="#d8d1ff" font-size="15" font-weight="700" letter-spacing="1.7">PRIVATE PRE-RELEASE</text>
+
+      <text x="535" y="266" fill="#f2f7fb" font-size="84" font-weight="750" letter-spacing="5">AIONEX</text>
+      <text x="540" y="310" fill="#8defff" font-size="23" font-weight="650" letter-spacing="3.2">DECISION INTELLIGENCE WORKSPACE</text>
+      <text x="540" y="373" fill="#c3cfdb" font-size="29" font-weight="430">Turn uncertainty into a reviewable action plan.</text>
+
+      <g fill="#91a2b3" font-size="16" font-weight="600" letter-spacing="1.4">
+        <text x="540" y="429">CONTEXT</text>
+        <circle cx="650" cy="423" r="3" fill="#35e7ff"/>
+        <text x="670" y="429">EVIDENCE</text>
+        <circle cx="790" cy="423" r="3" fill="#8b7cff"/>
+        <text x="810" y="429">RISK</text>
+        <circle cx="884" cy="423" r="3" fill="#35e7ff"/>
+        <text x="904" y="429">ACTION</text>
+      </g>
+
+      <text x="76" y="552" fill="#718294" font-size="15" letter-spacing="0.6">Rights and provider clearance pending</text>
+      <text x="1094" y="552" fill="#718294" font-size="15" text-anchor="end">Controlled local evaluation only</text>
+    </g>
+  </g>
+
+  <rect x="28.5" y="28.5" width="1143" height="573" rx="33.5" fill="none" stroke="#d9f8ff" stroke-opacity="0.12"/>
+</svg>
