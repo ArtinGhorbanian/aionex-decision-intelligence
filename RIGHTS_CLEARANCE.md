@@ -13,9 +13,10 @@ notices, contributor records, authorship declarations, competition or
 hackathon references, organizer rules, embargoes, team records, asset
 provenance, and provider terms.
 
-The review found:
+The initial source inspection, before this clearance package and private
+repository history were created, found:
 
-- no existing Git history or earlier commits;
+- no pre-existing Git history or earlier commits;
 - no prior `LICENSE`, `NOTICE`, contributor agreement, assignment, or authorship
   record;
 - no reliable evidence identifying the original author or every contributor;

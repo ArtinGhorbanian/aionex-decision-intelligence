@@ -124,7 +124,7 @@ python -m pytest -q
 python -m ruff check .
 ~~~
 
-The checked-in workflow is available at [.github/workflows/ci.yml](.github/workflows/ci.yml). No external CI badge is shown because a verified remote repository and public status endpoint have not been established.
+The checked-in workflow is available at [.github/workflows/ci.yml](.github/workflows/ci.yml). A public CI badge is intentionally omitted because the repository remains private.
 
 Default tests are intended to use demo/offline settings and must not require a live AI credential. Tests do not prove production security, legal clearance, provider compliance, accessibility certification, or decision accuracy.
 

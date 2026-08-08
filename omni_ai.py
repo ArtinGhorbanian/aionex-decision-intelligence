@@ -15,6 +15,7 @@ from __future__ import annotations
 import asyncio
 import json
 import os
+import re
 import time
 from dataclasses import dataclass
 from datetime import date, datetime, timezone
@@ -70,6 +71,25 @@ PredictionMetric = Literal[
     "copper",
     "gold",
 ]
+
+_ARABIC_SCRIPT_RE = re.compile(
+    "["
+    "\u0600-\u06ff"
+    "\u0750-\u077f"
+    "\u0870-\u089f"
+    "\u08a0-\u08ff"
+    "\ufb50-\ufdff"
+    "\ufe70-\ufeff"
+    "\U00010e60-\U00010e7f"
+    "\U00010ec0-\U00010eff"
+    "\U0001ec70-\U0001ecbf"
+    "\U0001ed00-\U0001ed4f"
+    "\U0001ee00-\U0001eeff"
+    "]"
+)
+_MACHINE_SAFE_OUTPUT_FIELD_NAMES = frozenset(
+    {"step_id", "milestone_id", "target_id", "url", "uri"}
+)
 
 ShortText = Annotated[str, Field(min_length=1, max_length=240)]
 MediumText = Annotated[str, Field(min_length=1, max_length=1_200)]
@@ -961,6 +981,15 @@ class OmniAIGateway:
                 response_id=response_id,
                 usage=usage,
             ) from exc
+        try:
+            _validate_english_human_readable_output(validated)
+        except _EnglishOnlyOutputViolation as exc:
+            raise AIResponseValidationError(
+                "The parsed AI response violated the English-only output requirement.",
+                cause=exc,
+                response_id=response_id,
+                usage=usage,
+            ) from exc
         return AIResult(
             data=validated,
             usage=usage,
@@ -1040,6 +1069,83 @@ class OmniAIGateway:
 # ---------------------------------------------------------------------------
 # Internal helpers
 # ---------------------------------------------------------------------------
+
+
+class _EnglishOnlyOutputViolation(ValueError):
+    """Internal marker for a non-English provider-authored prose field."""
+
+
+def _validate_english_human_readable_output(output: BaseModel) -> None:
+    """Reject Arabic-script text in provider-authored prose after schema parsing.
+
+    User input is never traversed here. Machine identifiers and URL/URI fields
+    remain opaque because they are not human-readable generated prose.
+    """
+
+    violation_path = _find_arabic_script_output_path(output)
+    if violation_path is None:
+        return
+    raise _EnglishOnlyOutputViolation(
+        "Arabic-script characters were found in human-readable output field "
+        f"'{_format_output_path(violation_path)}'."
+    )
+
+
+def _find_arabic_script_output_path(
+    value: Any,
+    path: tuple[str | int, ...] = (),
+) -> tuple[str | int, ...] | None:
+    if isinstance(value, str):
+        return path if _ARABIC_SCRIPT_RE.search(value) else None
+
+    if isinstance(value, BaseModel):
+        for field_name in type(value).model_fields:
+            if _is_machine_safe_output_field(field_name):
+                continue
+            violation = _find_arabic_script_output_path(
+                getattr(value, field_name),
+                (*path, field_name),
+            )
+            if violation is not None:
+                return violation
+        return None
+
+    if isinstance(value, Mapping):
+        for field_name, nested_value in value.items():
+            normalized_name = str(field_name)
+            if _is_machine_safe_output_field(normalized_name):
+                continue
+            violation = _find_arabic_script_output_path(
+                nested_value,
+                (*path, normalized_name),
+            )
+            if violation is not None:
+                return violation
+        return None
+
+    if isinstance(value, Sequence) and not isinstance(value, (bytes, bytearray)):
+        for index, nested_value in enumerate(value):
+            violation = _find_arabic_script_output_path(
+                nested_value,
+                (*path, index),
+            )
+            if violation is not None:
+                return violation
+    return None
+
+
+def _is_machine_safe_output_field(field_name: str) -> bool:
+    return field_name.casefold() in _MACHINE_SAFE_OUTPUT_FIELD_NAMES
+
+
+def _format_output_path(path: tuple[str | int, ...]) -> str:
+    formatted = ""
+    for part in path:
+        if isinstance(part, int):
+            formatted += f"[{part}]"
+        else:
+            formatted += f".{part}" if formatted else part
+    return formatted or "<root>"
 
 
 def _env_raw(name: str, *aliases: str) -> str | None:

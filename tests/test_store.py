@@ -14,6 +14,7 @@ def store_module(tmp_path, monkeypatch):
     monkeypatch.setenv("OMNI_DB_PATH", str(tmp_path / "store-test.db"))
     sys.modules.pop("omni_store", None)
     module = importlib.import_module("omni_store")
+    monkeypatch.setattr(module, "LEGACY_VAULT_PATH", tmp_path / "missing-legacy-vault.json")
     module.init_db()
     return module
 
@@ -150,3 +151,45 @@ def test_store_forces_english_locale_and_exposes_redacted_health(store_module):
     store.ensure_client(client_id, "fa")
     assert store.get_profile(client_id, "B2C")["locale"] == "en"
     assert store.storage_health() == {"ready": True}
+
+
+def test_empty_authorized_legacy_claim_does_not_block_later_claim(store_module):
+    store = store_module
+    authorized_client = "1" * 32
+
+    assert store.claim_legacy_analyses(authorized_client) == 0
+    with store.connection() as db:
+        marker = db.execute(
+            "SELECT value FROM metadata WHERE key='legacy_vault_claimed'"
+        ).fetchone()
+    assert marker is None
+
+    legacy_client = "legacy-local-vault"
+    store.ensure_client(legacy_client)
+    fixed_timestamp = "2026-01-02T03:04:05.000000Z"
+    with store.connection() as db:
+        db.execute(
+            """INSERT INTO analyses
+               (id, client_id, session_id, tier, horizon, query, answers_json,
+                response_json, intelligence_json, fingerprint, created_at, updated_at)
+               VALUES (?, ?, NULL, 'B2C', 'instant', ?, '{}', '{}', '{}', ?, ?, ?)""",
+            (
+                "synthetic-legacy-analysis",
+                legacy_client,
+                "Synthetic legacy query",
+                "synthetic-legacy-fingerprint",
+                fixed_timestamp,
+                fixed_timestamp,
+            ),
+        )
+
+    assert store.claim_legacy_analyses(authorized_client) == 1
+    with store.connection() as db:
+        analysis_owner = db.execute(
+            "SELECT client_id FROM analyses WHERE id='synthetic-legacy-analysis'"
+        ).fetchone()["client_id"]
+        claimed_by = db.execute(
+            "SELECT value FROM metadata WHERE key='legacy_vault_claimed'"
+        ).fetchone()["value"]
+    assert analysis_owner == authorized_client
+    assert claimed_by == authorized_client

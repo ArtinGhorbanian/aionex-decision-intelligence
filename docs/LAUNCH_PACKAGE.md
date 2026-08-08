@@ -113,12 +113,13 @@ structured analysis, B2B planning, B2C planning, opt-in memory
 - [ ] Replace the temporary no-license notice with the approved final license.
 - [ ] Verify SVG and favicon provenance.
 - [ ] Review every enabled data provider's current commercial terms and plan.
-- [ ] Run OSV/dependency audit on the exact release lock.
-- [ ] Pass CI, full tests, lint, and a clean-clone loopback smoke test.
+- [x] Run OSV/dependency audit on the exact release lock.
+- [x] Pass CI, the full test suite, and lint on the private pre-release commit.
+- [ ] Pass a clean-clone loopback smoke test on the exact release-candidate commit.
 - [ ] Run approved real-provider smoke tests without recording private inputs.
-- [ ] Capture real desktop and mobile screenshots from a clean demo database.
+- [x] Capture real desktop and mobile screenshots from a clean demo database.
 - [ ] Verify accessibility with keyboard, 200% zoom, reduced motion, and a
   screen reader.
-- [ ] Review all copy for guarantees, endorsements, or unsupported metrics.
+- [x] Review all copy for guarantees, endorsements, or unsupported metrics.
 - [ ] Enable private vulnerability reporting and branch protection.
 - [ ] Change visibility only after a named authorized reviewer records approval.

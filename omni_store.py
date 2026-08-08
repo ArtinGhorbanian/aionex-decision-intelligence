@@ -580,7 +580,7 @@ def list_analyses(client_id: str, limit: int = 30, include_legacy: bool = False)
 
 
 def claim_legacy_analyses(client_id: str) -> int:
-    """Attach the pre-v2 local vault to the first signed browser session once."""
+    """Attach imported pre-v2 analyses after explicit user authorization."""
     ensure_client(client_id)
     with _WRITE_LOCK, connection() as db:
         claimed = db.execute("SELECT value FROM metadata WHERE key='legacy_vault_claimed'").fetchone()
@@ -590,10 +590,11 @@ def claim_legacy_analyses(client_id: str) -> int:
             "UPDATE analyses SET client_id=?, updated_at=? WHERE client_id='legacy-local-vault'",
             (client_id, utc_now()),
         )
-        db.execute(
-            "INSERT OR REPLACE INTO metadata(key, value) VALUES('legacy_vault_claimed', ?)",
-            (client_id,),
-        )
+        if cur.rowcount > 0:
+            db.execute(
+                "INSERT OR REPLACE INTO metadata(key, value) VALUES('legacy_vault_claimed', ?)",
+                (client_id,),
+            )
     return cur.rowcount
 
 

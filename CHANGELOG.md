@@ -26,13 +26,15 @@ This changelog records repository work that has not been publicly released. It d
 - Keep browser rendering on safe DOM construction rather than direct HTML insertion.
 - Keep API documentation disabled by default and local evaluation bound to loopback in the documented setup.
 - Add private vulnerability-reporting guidance without inventing a public contact.
+- Reject Arabic-script text in live provider-generated human-readable output while preserving multilingual user input and opaque identifiers.
+- Isolate automated tests from private legacy-vault files and avoid recording a one-time claim when no legacy rows exist.
 
 ### Governance and documentation
 
 - Replace the repository README with an English product and evaluation guide.
 - Add security, contribution, conduct, support, roadmap, and changelog documents.
 - Add an original code-native AIONEX social-preview SVG without third-party marks.
-- State that no verified application screenshots are currently checked in.
+- Add verified desktop and mobile screenshots captured from the reviewed offline demo build.
 - Preserve the private pre-release gate pending rights, asset-provenance, competition-history, license, and provider review.
 
 ### Release status
