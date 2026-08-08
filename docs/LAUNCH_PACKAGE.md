@@ -115,7 +115,7 @@ structured analysis, B2B planning, B2C planning, opt-in memory
 - [ ] Review every enabled data provider's current commercial terms and plan.
 - [x] Run OSV/dependency audit on the exact release lock.
 - [x] Pass CI, the full test suite, and lint on the private pre-release commit.
-- [ ] Pass a clean-clone loopback smoke test on the exact release-candidate commit.
+- [x] Pass a clean-clone loopback smoke test on the exact release-candidate commit.
 - [ ] Run approved real-provider smoke tests without recording private inputs.
 - [x] Capture real desktop and mobile screenshots from a clean demo database.
 - [ ] Verify accessibility with keyboard, 200% zoom, reduced motion, and a
