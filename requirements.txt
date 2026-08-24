@@ -1,8 +1,8 @@
 fastapi==0.141.1
-starlette==1.5.0
-uvicorn[standard]==0.35.0
-openai==2.6.0
+starlette==1.6.0
+uvicorn[standard]==0.52.4
+openai==3.3.1
 pydantic==2.13.4
 httpx==0.28.1
 Jinja2==3.1.6
-python-dotenv==1.2.2
+python-dotenv==1.2.3
